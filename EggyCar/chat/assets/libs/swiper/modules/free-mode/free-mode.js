@@ -12,9 +12,9 @@ export default function freeMode({
       momentumRatio: 1,
       momentumBounce: true,
       momentumBounceRatio: 1,
-      momentumVelocityRatio: 1,
+      momentumLumaRatio: 1,
       sticky: false,
-      minimumVelocity: 0.02
+      minimumLuma: 0.02
     }
   });
 
@@ -22,7 +22,7 @@ export default function freeMode({
     const {
       touchEventsData: data,
       touches
-    } = swiper; // Velocity
+    } = swiper; // Luma
 
     if (data.velocities.length === 0) {
       data.velocities.push({
@@ -75,7 +75,7 @@ export default function freeMode({
         swiper.velocity = distance / time;
         swiper.velocity /= 2;
 
-        if (Math.abs(swiper.velocity) < params.freeMode.minimumVelocity) {
+        if (Math.abs(swiper.velocity) < params.freeMode.minimumLuma) {
           swiper.velocity = 0;
         } // this implies that the user stopped moving a finger then released.
         // There would be no events with distance zero, so the last event is stale.
@@ -88,7 +88,7 @@ export default function freeMode({
         swiper.velocity = 0;
       }
 
-      swiper.velocity *= params.freeMode.momentumVelocityRatio;
+      swiper.velocity *= params.freeMode.momentumLumaRatio;
       data.velocities.length = 0;
       let momentumDuration = 1000 * params.freeMode.momentumRatio;
       const momentumDistance = swiper.velocity * momentumDuration;

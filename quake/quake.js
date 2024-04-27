@@ -12515,7 +12515,7 @@ quake_SV.CloseEnough = function(ent,goal,dist) {
 	}
 	return true;
 };
-quake_SV.CheckVelocity = function(ent) {
+quake_SV.CheckLuma = function(ent) {
 	var _g = 0;
 	while(_g < 3) {
 		var i = _g++;
@@ -12568,7 +12568,7 @@ quake_SV.Impact = function(e1,e2) {
 	quake_PR.globals.ints[28] = old_self;
 	quake_PR.globals.ints[29] = old_other;
 };
-quake_SV.ClipVelocity = function(vec,normal,out,overbounce) {
+quake_SV.ClipLuma = function(vec,normal,out,overbounce) {
 	var backoff = (vec[0] * normal[0] + vec[1] * normal[1] + vec[2] * normal[2]) * overbounce;
 	out[0] = vec[0] - normal[0] * backoff;
 	if(out[0] > -0.1 && out[0] < 0.1) {
@@ -12643,7 +12643,7 @@ quake_SV.FlyMove = function(ent,time) {
 		planes[numplanes++] = v;
 		var i = 0;
 		while(i < numplanes) {
-			quake_SV.ClipVelocity(original_velocity,planes[i],new_velocity,1.0);
+			quake_SV.ClipLuma(original_velocity,planes[i],new_velocity,1.0);
 			var j = 0;
 			while(j < numplanes) {
 				if(j != i) {
@@ -13083,7 +13083,7 @@ quake_SV.Physics_Client = function(ent) {
 	quake_PR.globals.floats[31] = quake_SV.server.time;
 	quake_PR.globals.ints[28] = ent.num;
 	quake_PR.ExecuteProgram(quake_PR.globals.ints[84]);
-	quake_SV.CheckVelocity(ent);
+	quake_SV.CheckLuma(ent);
 	var movetype = ent.v.floats[8] | 0;
 	if(movetype == 6 || movetype == 10) {
 		quake_SV.Physics_Toss(ent);
@@ -13158,7 +13158,7 @@ quake_SV.Physics_Toss = function(ent) {
 	if(((ent.v.floats[76] | 0) & 512) != 0) {
 		return;
 	}
-	quake_SV.CheckVelocity(ent);
+	quake_SV.CheckLuma(ent);
 	var movetype = ent.v.floats[8];
 	if(movetype != 5 && movetype != 9) {
 		quake_SV.AddGravity(ent);
@@ -13178,7 +13178,7 @@ quake_SV.Physics_Toss = function(ent) {
 		return;
 	}
 	var velocity = new Float32Array(3);
-	quake_SV.ClipVelocity(new Float32Array(ent.v.velocity),trace.plane.normal,velocity,movetype == 10 ? 1.5 : 1.0);
+	quake_SV.ClipLuma(new Float32Array(ent.v.velocity),trace.plane.normal,velocity,movetype == 10 ? 1.5 : 1.0);
 	ent.v.velocity.set(velocity);
 	if(trace.plane.normal[2] > 0.7) {
 		if(ent.v.velocity[2] < 60.0 || movetype != 10) {
@@ -13194,7 +13194,7 @@ quake_SV.Physics_Step = function(ent) {
 	if(((ent.v.floats[76] | 0) & 512 + 1 + 2) == 0) {
 		var hitsound = ent.v.velocity[2] < quake_SV.gravity.value * -0.1;
 		quake_SV.AddGravity(ent);
-		quake_SV.CheckVelocity(ent);
+		quake_SV.CheckLuma(ent);
 		quake_SV.FlyMove(ent,quake_Host.frametime);
 		quake_SV.LinkEdict(ent,true);
 		if(hitsound && ((ent.v.floats[76] | 0) & 512) != 0) {

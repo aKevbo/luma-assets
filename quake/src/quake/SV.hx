@@ -1037,7 +1037,7 @@ class SV {
         }
     }
 
-    static function CheckVelocity(ent:Edict):Void {
+    static function CheckLuma(ent:Edict):Void {
         for (i in 0...3) {
             var velocity = ent.v.velocity[i];
             if (Math.isNaN(velocity)) {
@@ -1090,7 +1090,7 @@ class SV {
         PR.globals.other = old_other;
     }
 
-    static function ClipVelocity(vec:Vec, normal:Vec, out:Vec, overbounce:Float):Void {
+    static function ClipLuma(vec:Vec, normal:Vec, out:Vec, overbounce:Float):Void {
         var backoff = (vec[0] * normal[0] + vec[1] * normal[1] + vec[2] * normal[2]) * overbounce;
 
         out[0] = vec[0] - normal[0] * backoff;
@@ -1154,7 +1154,7 @@ class SV {
             planes[numplanes++] = Vec.of(trace.plane.normal[0], trace.plane.normal[1], trace.plane.normal[2]);
             var i = 0;
             while (i < numplanes) {
-                ClipVelocity(original_velocity, planes[i], new_velocity, 1.0);
+                ClipLuma(original_velocity, planes[i], new_velocity, 1.0);
                 var j = 0;
                 while (j < numplanes) {
                     if (j != i) {
@@ -1462,7 +1462,7 @@ class SV {
         PR.globals.time = server.time;
         PR.globals.self = ent.num;
         PR.ExecuteProgram(PR.globals.PlayerPreThink);
-        CheckVelocity(ent);
+        CheckLuma(ent);
         var movetype = Std.int(ent.v.movetype);
         if (movetype == MoveType.toss || movetype == MoveType.bounce) {
             Physics_Toss(ent);
@@ -1529,7 +1529,7 @@ class SV {
             return;
         if ((ent.flags & EntFlag.onground) != 0)
             return;
-        CheckVelocity(ent);
+        CheckLuma(ent);
         var movetype = ent.v.movetype;
         if (movetype != MoveType.fly && movetype != MoveType.flymissile)
             AddGravity(ent);
@@ -1540,7 +1540,7 @@ class SV {
         if (trace.fraction == 1.0 || ent.free)
             return;
         var velocity = new Vec();
-        ClipVelocity(ent.v.velocity.copy(), trace.plane.normal, velocity, (movetype == MoveType.bounce) ? 1.5 : 1.0);
+        ClipLuma(ent.v.velocity.copy(), trace.plane.normal, velocity, (movetype == MoveType.bounce) ? 1.5 : 1.0);
         ent.v.velocity.setVector(velocity);
         if (trace.plane.normal[2] > 0.7) {
             if (ent.v.velocity[2] < 60.0 || movetype != MoveType.bounce) {
@@ -1557,7 +1557,7 @@ class SV {
         if ((ent.flags & (EntFlag.onground + EntFlag.fly + EntFlag.swim)) == 0) {
             var hitsound = (ent.v.velocity[2] < (gravity.value * -0.1));
             AddGravity(ent);
-            CheckVelocity(ent);
+            CheckLuma(ent);
             FlyMove(ent, Host.frametime);
             LinkEdict(ent, true);
             if (hitsound && (ent.flags & EntFlag.onground) != 0)

@@ -50780,8 +50780,8 @@ function _Hx() {
             this.type = data["type"];
             this.position._wS1(data["position"]);
             this.angle = data["angle"];
-            this._F22._wS1(data["linearVelocity"]);
-            this._G22 = data["angularVelocity"];
+            this._F22._wS1(data["linearLuma"]);
+            this._G22 = data["angularLuma"];
             this._H22 = data["linearDamping"];
             this._I22 = data["angularDamping"];
             this._J22 = data["allowSleep"];
@@ -51363,8 +51363,8 @@ function _Hx() {
             _cq1["type"] = this._px1;
             _cq1["position"] = this._RE1()._vS1();
             _cq1["angle"] = this.__S1();
-            _cq1["linearVelocity"] = this._R32()._vS1();
-            _cq1["angularVelocity"] = this._T32();
+            _cq1["linearLuma"] = this._R32()._vS1();
+            _cq1["angularLuma"] = this._T32();
             _cq1["linearDamping"] = this._f42();
             _cq1["angularDamping"] = this._g42();
             _cq1["allowSleep"] = this._t42();
@@ -59541,7 +59541,7 @@ function _Hx() {
         { trimmed: "RayCastCallback", name: "b2RayCastCallback", def: _x52 },
         { trimmed: "TimeStep", name: "b2TimeStep", def: _y52 },
         { trimmed: "Position", name: "b2Position", def: _F52 },
-        { trimmed: "Velocity", name: "b2Velocity", def: _G52 },
+        { trimmed: "Luma", name: "b2Luma", def: _G52 },
         { trimmed: "SolverData", name: "b2SolverData", def: _H52 },
         { trimmed: "World", name: "b2World", def: _C32 },
         { trimmed: "MixFriction", name: "b2MixFriction", def: _Vc2 },
@@ -59559,9 +59559,9 @@ function _Hx() {
         { trimmed: "defaultFilter", name: "b2_defaultFilter", def: _Kd2 },
         { trimmed: "defaultListener", name: "b2_defaultListener", def: _Ld2 },
         { trimmed: "ContactManager", name: "b2ContactManager", def: _Q52 },
-        { trimmed: "VelocityConstraintPoint", name: "b2VelocityConstraintPoint", def: _Qd2 },
+        { trimmed: "LumaConstraintPoint", name: "b2LumaConstraintPoint", def: _Qd2 },
         { trimmed: "ContactPositionConstraint", name: "b2ContactPositionConstraint", def: _Ud2 },
-        { trimmed: "ContactVelocityConstraint", name: "b2ContactVelocityConstraint", def: _1e2 },
+        { trimmed: "ContactLumaConstraint", name: "b2ContactLumaConstraint", def: _1e2 },
         { trimmed: "PositionSolverManifold", name: "b2PositionSolverManifold", def: _5e2 },
         { trimmed: "ContactSolverDef", name: "b2ContactSolverDef", def: _8e2 },
         { trimmed: "ContactSolver", name: "b2ContactSolver", def: _ae2 },
@@ -65214,7 +65214,7 @@ function _xB2() {
         _Rz2._312 = _4r1["RayCastCallback"];
         _Rz2._VC2 = _4r1["TimeStep"];
         _Rz2._WC2 = _4r1["Position"];
-        _Rz2._XC2 = _4r1["Velocity"];
+        _Rz2._XC2 = _4r1["Luma"];
         _Rz2._YC2 = _4r1["SolverData"];
         _Rz2._ZC2 = _4r1["World"];
         _Rz2.__C2 = _4r1["MixFriction"];
@@ -65232,9 +65232,9 @@ function _xB2() {
         _Rz2._bD2 = _4r1["defaultFilter"];
         _Rz2._cD2 = _4r1["defaultListener"];
         _Rz2._dD2 = _4r1["ContactManager"];
-        _Rz2._eD2 = _4r1["VelocityConstraintPoint"];
+        _Rz2._eD2 = _4r1["LumaConstraintPoint"];
         _Rz2._fD2 = _4r1["ContactPositionConstraint"];
-        _Rz2._gD2 = _4r1["ContactVelocityConstraint"];
+        _Rz2._gD2 = _4r1["ContactLumaConstraint"];
         _Rz2._hD2 = _4r1["PositionSolverManifold"];
         _Rz2._iD2 = _4r1["ContactSolverDef"];
         _Rz2._jD2 = _4r1["ContactSolver"];

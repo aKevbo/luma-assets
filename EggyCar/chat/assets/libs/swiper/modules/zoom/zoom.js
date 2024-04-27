@@ -256,7 +256,7 @@ export default function Zoom({
 
     if (image.currentY > image.maxY) {
       image.currentY = image.maxY - 1 + (image.currentY - image.maxY + 1) ** 0.8;
-    } // Velocity
+    } // Luma
 
 
     if (!velocity.prevPositionX) velocity.prevPositionX = image.touchesCurrent.x;
